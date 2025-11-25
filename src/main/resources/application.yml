@@ -18,10 +18,18 @@ server:
   port: 9090
 
 management:
+  server:
+    port: 9090
   endpoints:
     web:
       exposure:
-        include: health,info
+        include: health,info,metrics,caches,cache,prometheus
+  metrics:
+    enable:
+      cache: true
+  endpoint:
+    health:
+      show-details: always
 
 springdoc:
   api-docs:
@@ -32,3 +40,9 @@ springdoc:
     title: CRUD App API
     description: Simple CRUD operations with MongoDB
     version: 1.0.0
+
+logging:
+  level:
+    com.sohan.crudapp: INFO
+    org.springframework.cache.interceptor.CacheInterceptor: TRACE
+    org.springframework.data.redis.cache: TRACE
